@@ -7,8 +7,9 @@ Route::inertia('/', 'Welcome')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'Dashboard')->name('dashboard');
+
     Route::resource('anagrafiche', AnagraficheController::class);
-    // Route::inertia('anagrafiche', 'Anagrafiche')->name('anagrafiche');
+
     Route::inertia('letture', 'Letture')->name('letture');
 });
 

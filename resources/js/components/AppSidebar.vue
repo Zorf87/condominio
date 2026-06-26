@@ -14,7 +14,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { anagrafiche, dashboard, letture } from '@/routes';
+import { dashboard, letture } from '@/routes';
+import anagrafiche from '@/routes/anagrafiche';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -25,7 +26,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Anagrafiche',
-        href: anagrafiche(),
+        href: anagrafiche.index().url,
         icon: Users,
     },
     {

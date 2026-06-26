@@ -12,4 +12,10 @@ class Anagrafica extends Model
 
     protected $table = 'anagrafiche';
     protected $fillable = ["nome"];
+    protected $with = ['user'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

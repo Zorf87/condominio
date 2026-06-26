@@ -43,7 +43,8 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl } from '@/lib/utils';
-import { anagrafiche, dashboard, letture } from '@/routes';
+import { dashboard, letture } from '@/routes';
+import anagrafiche from '@/routes/anagrafiche';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 type Props = {
@@ -69,7 +70,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Anagrafiche',
-        href: anagrafiche(),
+        href: anagrafiche.index().url,
         icon: Users,
     },
     {
