@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\UnitaMisura;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,11 +16,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'test@example.com'],
+            User::factory()->raw(['name' => 'Test User'])
+        );
+
+        $dati = [
+            ['grandezza' => 'consumo energetico', 'simbolo' => 'kWh'],
+            ['grandezza' => 'consumo acqua', 'simbolo' => 'm³'],
+        ];
+
+        foreach ($dati as $riga) {
+            UnitaMisura::firstOrCreate(['simbolo' => $riga['simbolo']], $riga);
+        }
+
+
+        $this->call(LettureSeeder::class);
     }
 }
