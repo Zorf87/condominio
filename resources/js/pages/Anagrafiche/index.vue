@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, router } from '@inertiajs/vue3';
 import { Edit, EllipsisVertical, Trash } from '@lucide/vue';
 import { DropdownMenuItemIndicator, DropdownMenuPortal } from 'reka-ui';
 import Button from '@/components/ui/button/Button.vue';
@@ -9,6 +9,7 @@ import DropdownMenuContent from '@/components/ui/dropdown-menu/DropdownMenuConte
 import DropdownMenuGroup from '@/components/ui/dropdown-menu/DropdownMenuGroup.vue';
 import DropdownMenuItem from '@/components/ui/dropdown-menu/DropdownMenuItem.vue';
 import DropdownMenuTrigger from '@/components/ui/dropdown-menu/DropdownMenuTrigger.vue';
+import { useConfirm } from '@/composables/useConfirm';
 import anagrafiche from '@/routes/anagrafiche';
 
 defineOptions({
@@ -28,6 +29,25 @@ defineProps({
         required: true,
     },
 });
+
+const { open } = useConfirm();
+
+async function handleDelete(user: any) {
+    const { isCanceled } = await open({
+        title: "Eliminare l'anagrafica?",
+        description: "L'operazione è irreversibile.",
+        confirmText: 'Elimina',
+        variant: 'destructive',
+    });
+
+    console.log(user, 'isCanceled', isCanceled);
+
+    if (isCanceled) {
+        return;
+    }
+
+    router.delete(anagrafiche.destroy(user));
+}
 </script>
 <template>
     <Head title="Anagrafiche" />
@@ -81,7 +101,10 @@ defineProps({
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem>
-                                        <Button variant="link"
+                                        <Button
+                                            variant="link"
+                                            class="text-red-400"
+                                            @click="handleDelete(item)"
                                             ><Trash /> Elimina</Button
                                         ></DropdownMenuItem
                                     >
