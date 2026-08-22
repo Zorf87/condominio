@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import { Edit, EllipsisVertical, Trash } from '@lucide/vue';
 import { DropdownMenuItemIndicator, DropdownMenuPortal } from 'reka-ui';
 import Button from '@/components/ui/button/Button.vue';
@@ -70,10 +70,16 @@ defineProps({
                             <DropdownMenuPortal>
                                 <DropdownMenuContent>
                                     <DropdownMenuItem>
-                                        <Button variant="link"
-                                            ><Edit /> Modifica</Button
-                                        ></DropdownMenuItem
-                                    >
+                                        <Link
+                                            :href="
+                                                anagrafiche.edit(item.id).url
+                                            "
+                                        >
+                                            <Button variant="link"
+                                                ><Edit /> Modifica</Button
+                                            >
+                                        </Link>
+                                    </DropdownMenuItem>
                                     <DropdownMenuItem>
                                         <Button variant="link"
                                             ><Trash /> Elimina</Button

@@ -11,7 +11,7 @@ class Anagrafica extends Model
     use HasFactory;
 
     protected $table = 'anagrafiche';
-    protected $fillable = ["nome"];
+    protected $fillable = ["nome", "email", "telefono", "cellulare", "note", "user_id"];
     protected $with = ['user'];
 
     public function user()
