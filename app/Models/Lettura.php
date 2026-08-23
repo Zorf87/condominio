@@ -11,7 +11,7 @@ class Lettura extends Model
     use HasFactory;
 
     protected $table = 'letture';
-    protected $fillable = ["anagrafica_id", "valore", "unita_misura_id"];
+    protected $fillable = ["data_lettura","anagrafica_id", "valore", "unita_misura_id"];
 
 
     public function anagrafica()

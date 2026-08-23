@@ -1,4 +1,7 @@
 import { createInertiaApp } from '@inertiajs/vue3';
+import { TanStackDevtools } from '@tanstack/vue-devtools';
+import { tableDevtoolsPlugin } from '@tanstack/vue-table-devtools';
+import { createApp, defineComponent, h } from 'vue';
 import { initializeTheme } from '@/composables/useAppearance';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
@@ -23,6 +26,22 @@ createInertiaApp({
     },
     progress: {
         color: '#4B5563',
+    },
+    setup({ el, App, props, plugin }) {
+        const Root = defineComponent({
+            setup() {
+                return () => [
+                    h(App, props),
+                    import.meta.env.DEV
+                        ? h(TanStackDevtools, {
+                              plugins: [tableDevtoolsPlugin({})],
+                          })
+                        : null,
+                ];
+            },
+        });
+
+        createApp(Root).use(plugin).mount(el!);
     },
 });
 

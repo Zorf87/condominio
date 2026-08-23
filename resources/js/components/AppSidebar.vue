@@ -14,8 +14,9 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, letture } from '@/routes';
+import { dashboard } from '@/routes';
 import anagrafiche from '@/routes/anagrafiche';
+import letture from '@/routes/letture';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -31,7 +32,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Letture',
-        href: letture(),
+        href: letture.index().url,
         icon: Archive,
     },
 ];
