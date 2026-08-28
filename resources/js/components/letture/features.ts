@@ -2,7 +2,7 @@
 import {
     columnFilteringFeature,
     columnVisibilityFeature,
-    createExpandedRowModel,
+    // createExpandedRowModel,
     createFilteredRowModel,
     createPaginatedRowModel,
     createSortedRowModel,
@@ -25,7 +25,7 @@ export const features = tableFeatures({
     rowPaginationFeature,
     rowSelectionFeature,
     rowSortingFeature,
-    expandedRowModel: createExpandedRowModel(),
+    //expandedRowModel: createExpandedRowModel(),
     filteredRowModel: createFilteredRowModel(),
     paginatedRowModel: createPaginatedRowModel(),
     sortedRowModel: createSortedRowModel(),
