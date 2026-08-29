@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import ColumnTextFilter from '@/components/letture/column-text-filter.vue';
 import { columns } from '@/components/letture/columns';
 import DataTable from '@/components/letture/data-table.vue';
 import letture from '@/routes/letture';
@@ -28,7 +29,15 @@ defineProps({
         class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
     >
         <section class="mx-auto w-full max-w-3/4">
-            <DataTable :columns="columns" :data="items.data" />
+            <DataTable :columns="columns" :data="items.data">
+                <template #toolbar="{ table }">
+                    <ColumnTextFilter
+                        :table="table"
+                        column-id="anagrafica"
+                        placeholder="Filtra anagrafica..."
+                    />
+                </template>
+            </DataTable>
         </section>
     </div>
 </template>

@@ -2,6 +2,7 @@
 import { createColumnHelper } from '@tanstack/vue-table';
 import { useDateFormat } from '@vueuse/core';
 import { h } from 'vue';
+import { useNumberFormat } from '@/composables/useFormatFormat';
 import type { DataTableFeatures } from './features';
 
 export interface Lettura {
@@ -18,6 +19,7 @@ const columnHelper = createColumnHelper<DataTableFeatures, Lettura>();
 export const columns = columnHelper.columns([
     columnHelper.accessor('data_lettura', {
         header: 'Data lettura',
+        size: 120,
         cell: ({ getValue }) =>
             h(
                 'div',
@@ -27,11 +29,15 @@ export const columns = columnHelper.columns([
     }),
     columnHelper.accessor('valore', {
         header: 'Valore',
+        size: 140,
         cell: ({ row, getValue }) =>
-            `${getValue()} ${row.original.unita_misura.simbolo}`,
+            `${
+                useNumberFormat(() => getValue()).value
+            } ${row.original.unita_misura.simbolo}`,
     }),
-    columnHelper.accessor((row) => row.anagrafica.nome, {
-        id: 'anagrafica',
+    columnHelper.accessor('anagrafica', {
         header: 'Anagrafica',
+        size: 200,
+        cell: ({ getValue }) => `${getValue().nome}`,
     }),
 ]);

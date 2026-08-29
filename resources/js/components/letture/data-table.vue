@@ -68,8 +68,18 @@ useTanStackTableDevtools(table);
     <div
         class="relative flex flex-1 flex-col gap-4 overflow-auto px-4 outline-none lg:px-6"
     >
+        <div v-if="$slots.toolbar" class="flex items-center gap-2">
+            <slot name="toolbar" :table="table" />
+        </div>
         <div class="overflow-hidden rounded-lg border">
-            <Table>
+            <Table class="table-fixed">
+                <colgroup>
+                    <col
+                        v-for="header in table.getFlatHeaders()"
+                        :key="header.id"
+                        :style="{ width: `${header.getSize()}px` }"
+                    />
+                </colgroup>
                 <TableHeader class="sticky top-0 z-10 bg-muted">
                     <TableRow
                         v-for="headerGroup in table.getHeaderGroups()"

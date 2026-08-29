@@ -1,6 +1,7 @@
 // components/letture/features.ts
 import {
     columnFilteringFeature,
+    columnSizingFeature,
     columnVisibilityFeature,
     // createExpandedRowModel,
     createFilteredRowModel,
@@ -20,6 +21,7 @@ import {
 // register is tree-shaken out of the bundle.
 export const features = tableFeatures({
     columnFilteringFeature,
+    columnSizingFeature,
     columnVisibilityFeature,
     rowExpandingFeature,
     rowPaginationFeature,
