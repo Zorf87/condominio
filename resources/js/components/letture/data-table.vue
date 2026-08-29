@@ -34,7 +34,6 @@ const props = defineProps<{
     columns: ColumnDef<DataTableFeatures, TData>[];
     data: TData[];
 }>();
-
 const pagination = ref({
     pageIndex: 0,
     pageSize: 50, // default a 50
