@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import ColumnSelectFilter from '@/components/letture/column-select-filter.vue';
 import ColumnTextFilter from '@/components/letture/column-text-filter.vue';
 import { columns } from '@/components/letture/columns';
 import DataTable from '@/components/letture/data-table.vue';
@@ -35,6 +36,11 @@ defineProps({
                         :table="table"
                         column-id="anagrafica"
                         placeholder="Filtra anagrafica..."
+                    />
+                    <ColumnSelectFilter
+                        :table="table"
+                        column-id="unita_misura"
+                        placeholder="Filtra tipo lettura..."
                     />
                 </template>
             </DataTable>

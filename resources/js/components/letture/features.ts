@@ -31,7 +31,16 @@ export const features = tableFeatures({
     filteredRowModel: createFilteredRowModel(),
     paginatedRowModel: createPaginatedRowModel(),
     sortedRowModel: createSortedRowModel(),
-    filterFns: { includesString: filterFn_includesString },
+    filterFns: {
+        includesString: filterFn_includesString,
+        equalsId: (row, columnId, filterValue) => {
+            if (filterValue == null || filterValue === '') {
+                return true;
+            }
+
+            return String(row.getValue(columnId)) === String(filterValue);
+        },
+    },
     sortFns: { alphanumeric: sortFn_alphanumeric, text: sortFn_text },
 });
 

@@ -27,6 +27,11 @@ export const columns = columnHelper.columns([
                 useDateFormat(getValue(), 'DD/MM/YYYY').value,
             ),
     }),
+    columnHelper.accessor('anagrafica', {
+        header: 'Anagrafica',
+        size: 200,
+        cell: ({ getValue }) => `${getValue().nome}`,
+    }),
     columnHelper.accessor('valore', {
         header: 'Valore',
         size: 140,
@@ -35,9 +40,12 @@ export const columns = columnHelper.columns([
                 useNumberFormat(() => getValue()).value
             } ${row.original.unita_misura.simbolo}`,
     }),
-    columnHelper.accessor('anagrafica', {
-        header: 'Anagrafica',
-        size: 200,
-        cell: ({ getValue }) => `${getValue().nome}`,
+    columnHelper.accessor((row) => row.unita_misura.id, {
+        id: 'unita_misura', // stesso id usato dal filtro
+        header: 'Tipo lettura',
+        size: 140,
+        filterFn: 'equalsId',
+        cell: ({ row }) =>
+            h('div', { class: 'uppercase' }, row.original.unita_misura.tipo),
     }),
 ]);
