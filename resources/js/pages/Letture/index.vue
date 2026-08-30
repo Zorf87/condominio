@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
+import { Head, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import ColumnSelectFilter from '@/components/letture/column-select-filter.vue';
 import ColumnTextFilter from '@/components/letture/column-text-filter.vue';
 import { columns } from '@/components/letture/columns';
@@ -23,6 +24,11 @@ defineProps({
         required: true,
     },
 });
+
+const page = usePage();
+const unitaMisura = computed(() => page.props.unitaMisura);
+
+console.log('unitaMisura: ', unitaMisura.value);
 </script>
 <template>
     <Head title="Letture" />
@@ -40,6 +46,7 @@ defineProps({
                     <ColumnSelectFilter
                         :table="table"
                         column-id="unita_misura"
+                        :options="unitaMisura"
                         placeholder="Filtra tipo lettura..."
                     />
                 </template>

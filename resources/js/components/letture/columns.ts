@@ -46,6 +46,6 @@ export const columns = columnHelper.columns([
         size: 140,
         filterFn: 'equalsId',
         cell: ({ row }) =>
-            h('div', { class: 'uppercase' }, row.original.unita_misura.tipo),
+            h('div', { class: 'capitalize' }, row.original.unita_misura.tipo),
     }),
 ]);

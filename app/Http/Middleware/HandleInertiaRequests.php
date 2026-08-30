@@ -2,7 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\UnitaMisuraResource;
+use App\Models\UnitaMisura;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -42,6 +45,14 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'unitaMisura' => fn() => Cache::remember(
+                'unita-misura',
+                3600,
+                fn() =>
+                UnitaMisuraResource::collection(
+                    UnitaMisura::orderBy('tipo')->get()
+                )->resolve() // ✅ array semplice, serializzabile senza problemi
+            ),
         ];
     }
 }
